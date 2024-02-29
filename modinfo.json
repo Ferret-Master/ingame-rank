@@ -1,0 +1,23 @@
+{
+    "context": "client",
+    "identifier": "com.pa.ferretmaster.ingame-rank",
+    "display_name": "In Game Rank Display",
+    "description": "Displays the current ranked badge of players in game",
+    "author": "Ferretmaster",
+    "version": "1.0",
+    "build": "116982",
+    "date": "2024-02-29",
+    "signature": "not yet implemented",
+    "forum": "",
+    "icon": "https://github.com/ferret-Master/lobby_browser/blob/main/lobbyBrowser.png?raw=true",
+    "priority": 100,
+    "category": [
+        "titans", "in-game","server"
+        
+    ],
+    "scenes": {
+    "live_game_players":[
+      "coui://ui/mods/ingame_rank/ranks.js"
+    ]
+	}
+}
