@@ -8,11 +8,11 @@
     "build": "116982",
     "date": "2024-02-29",
     "signature": "not yet implemented",
-    "forum": "",
-    "icon": "https://github.com/ferret-Master/lobby_browser/blob/main/lobbyBrowser.png?raw=true",
+    "forum": "https://steamcommunity.com/app/386070/discussions/0/4306075118780061254/",
+    "icon": "https://github.com/Ferret-Master/ingame-rank/blob/main/ingame_rank_icon.png?raw=true",
     "priority": 100,
     "category": [
-        "titans", "in-game","server"
+        "titans", "in-game","client"
         
     ],
     "scenes": {
