@@ -1,22 +1,45 @@
-console.log("ingame ranks loaded")
+
+
+var script = document.createElement('script');
+var script2 = document.createElement('script');
+script.onload = function () {
+    for(var i = 1; i < 6;i++){
+        LeaderboardUtility.fetchLeagueInfo(i, "PAExpansion1:Ladder1v1").done(function(numberOfPlayersWithRank, players){
+            _.map(players, function(player){
+                if(player !== undefined){
+                    _.delay(function(){
+                        model.usernameRankMap[player.displayName()] = {
+                            leaguePosition: player.leaguePosition,
+                            league:model.returnLeagueBasedOnRating(player.rating)
+                        }
+                    },2000)
+                   
+                }
+            })
+        })
+    }
+};
+script2.onload = function(){
+    _.delay(function(){
+        if(model.showPlayerListPanel() == false){
+            return
+        }
+        else{
+            
+            _.delay(function(){addRanks()}, 1000)
+        }
+    },2000)
+    
+}
+script.src = "coui://ui/main/shared/js/leaderboard_utility.js";
+script2.src = "coui://ui/main/shared/js/matchmaking_utility.js";
+
+document.head.appendChild(script)
+document.head.appendChild(script2)
 
 model.usernameRankMap = {}
 
-for(var i = 1; i < 6;i++){
-    LeaderboardUtility.fetchLeagueInfo(i, "PAExpansion1:Ladder1v1").done(function(numberOfPlayersWithRank, players){
-        _.map(players, function(player){
-            if(player !== undefined){
-                _.delay(function(){
-                    model.usernameRankMap[player.displayName()] = {
-                        leaguePosition: player.leaguePosition,
-                        league:model.returnLeagueBasedOnRating(player.rating)
-                    }
-                },2000)
-               
-            }
-        })
-    })
-}
+
 
 
 // if(data.LeaguePosition == -1){player.rankedInfo().rank("Inactive")}
@@ -58,20 +81,16 @@ model.addBadge = ko.computed(function(){
 })
 
 function addRanks(){
-    for( var i = 0; i< model.players().length;i++){
-        var playerRankInfo = model.usernameRankMap[model.sortedPlayerList()[i].name]
-        if(playerRankInfo == undefined){continue}
-        var src = MatchmakingUtility.getSmallBadgeURL(playerRankInfo.league)
- 
-        $($(".div_player_name_status")[i]).after('<img width="24px" height="20px" src='+src+'><span>'+playerRankInfo.leaguePosition+'</span>')
+    var playerCounter = 0;
+    for( var i = 0; i< model.sortedPlayersArray().length;i++){
+        for( var j = 0; j< model.sortedPlayersArray()[i].length;j++){
+            var playerRankInfo = model.usernameRankMap[model.sortedPlayersArray()[i][j].name]
+            if(playerRankInfo == undefined){playerCounter++;continue}
+            var src = MatchmakingUtility.getSmallBadgeURL(playerRankInfo.league)
+            $($(".div_player_name_status")[playerCounter]).after('<img style="margin-left: 10px" width="24px" height="20px" src='+src+' ><span>'+playerRankInfo.leaguePosition+'</span>')
+            playerCounter++
+        }
     }
 }
-_.delay(function(){
-    if(model.showPlayerListPanel() == false){
-        return
-    }
-    else{
-        
-        _.delay(function(){addRanks()}, 1000)
-    }
-},2000)
+
+
