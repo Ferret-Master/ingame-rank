@@ -61,10 +61,10 @@ model.usernameRankMap = {}
 
 
 model.returnLeagueBasedOnRating = function(rating){
-    if(rating > 2275){return 1}
-    if(rating > 2000){return 2}
-    if(rating > 1700){return 3}
-    if(rating > 1100){return 4}
+    if(rating >= 2275){return 1}
+    if(rating >= 2000){return 2}
+    if(rating >= 1700){return 3}
+    if(rating >= 1100){return 4}
     if(rating > 0){ return 5}
     return 6
 }
