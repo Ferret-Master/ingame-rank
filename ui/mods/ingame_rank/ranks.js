@@ -2,6 +2,7 @@
 
 var script = document.createElement('script');
 var script2 = document.createElement('script');
+
 script.onload = function () {
     for(var i = 1; i < 6;i++){
         LeaderboardUtility.fetchLeagueInfo(i, "PAExpansion1:Ladder1v1").done(function(numberOfPlayersWithRank, players){
@@ -87,7 +88,7 @@ function addRanks(){
             var playerRankInfo = model.usernameRankMap[model.sortedPlayersArray()[i][j].name]
             if(playerRankInfo == undefined){playerCounter++;continue}
             var src = MatchmakingUtility.getSmallBadgeURL(playerRankInfo.league)
-            $($(".div_player_name_status")[playerCounter]).after('<img style="margin-left: 10px" width="24px" height="20px" src='+src+' ><span>'+playerRankInfo.leaguePosition+'</span>')
+            $($(".div_player_name_status")[playerCounter]).after('<img style="margin-left: 10px" width="24px" height="20px" src='+src+' ><span></span>')
             playerCounter++
         }
     }
